@@ -143,9 +143,6 @@ void __fastcall TForm1::StatystykaWyrazowExecute(TObject *Sender)
 {
 if(TDocument* Zakladka1 = dynamic_cast<TDocument*>(PageControl1->ActivePage))
 		{
-
-			TStrings *tekst = Zakladka1->RichEdit->Lines;
-
 			std::string napis;
 			AnsiString str = Zakladka1->RichEdit->Lines->GetText();
 			napis = str.c_str();
@@ -162,7 +159,7 @@ if(TDocument* Zakladka1 = dynamic_cast<TDocument*>(PageControl1->ActivePage))
 
 
 
-		for (i = 0; i < napis.length(); i++) {
+		for (unsigned i = 0; i < napis.length(); i++) {
 
 			if (napis[i]==' ') {
 
