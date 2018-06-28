@@ -1,0 +1,156 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+#include "Unit1.h"
+#include "Unit2.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TForm1 *Form1;
+//---------------------------------------------------------------------------
+__fastcall TForm1::TForm1(TComponent* Owner)
+	: TForm(Owner)
+{
+	TDocument *Zakladka = new TDocument(PageControl1);
+	Zakladka->RichEdit->OnChange = UaktualnijStatystykiExecute;
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::OtworzExecute(TObject *Sender)
+{
+	if(OpenDialog1->Execute()) {
+			TDocument *Zakladka;
+			Zakladka = new TDocument(PageControl1);
+			Zakladka->LoadFromFile(OpenDialog1->FileName);
+			PageControl1->ActivePageIndex = (PageControl1->PageCount - 1);
+			Zakladka->RichEdit->OnChange = UaktualnijStatystykiExecute;
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::ZapiszExecute(TObject *Sender)
+{
+	if(SaveDialog1->Execute()) {
+		//TTabSheet *Zakladka1;
+		//Zakladka1 = PageControl1->ActivePage;
+
+		//void *Zakladka2 = dynamic_cast<void *>(Zakladka1);
+
+
+
+		if(TDocument* Zakladka1 = dynamic_cast<TDocument*>(PageControl1->ActivePage))
+		{
+			Zakladka1->SaveToFile(SaveDialog1->FileName);
+		}
+
+		//void *Zakladka4 = dynamic_cast<void *>(Zakladka3);
+
+	//	TDocument *Zakladka2;
+	//	Zakladka2->ActivePage->RichEdit->Lines->SaveToFile(SaveDialog1->FileName);
+	//	Zakladka = new TDocument(PageControl1->ActivePage);
+	//	Zakladka = dynamic_cast<void *>(PageControl1->ActivePage);
+	//	Zakladka->SaveToFile(SaveDialog1->FileName);
+    }
+//	if(SaveDialog1->Execute()) {
+//		RichEdit1->Lines->SaveToFile(SaveDialog1->FileName);
+//	}
+}
+//---------------------------------------------------------------------------
+
+void TForm1::DodajZakladke(TPageControl *APageControl)
+{
+//	TDocument *Zakladka;
+//	Zakladka = new TDocument(APageControl);
+
+	/* Tworzenie nowego obiektu klasy TTabSheet. Jako argument konstruktora
+	nale¿y podaæ komponent klasy TpageControl, do którego dodajemy zak³adkê.*/
+	//TTabSheet *Zakladka;
+	//Zakladka = new TTabSheet(APageControl);
+	/* Dla nowo utworzonej zak³adki musimy jeszcze ustawiæ w³aœciwoœæ
+	PageControl, czyli wskazanie na w³aœciciela */
+	//Zakladka->PageControl = APageControl;
+	/* Na koniec ustawiamy tekst, który wyœwietli siê jako nazwa zak³adki*/
+	//Zakladka->Caption="Nowy plik";
+
+	//TRichEdit *RichEdit;
+	//RichEdit = new TRichEdit(Zakladka);
+	//RichEdit->Parent = Zakladka; // Konieczne jest przypisanie rodzica
+	//RichEdit->Align = alClient; // RichEdit rozci¹gniêty na ca³¹ zak³adkê
+	/* w razie koniecznoœci pojawi¹ siê paski przewijania */
+	//RichEdit->ScrollBars = ssBoth;	//Dodanie menu kontekstowego	//RichEdit->PopupMenu = PopupMenu1;
+}
+//---------------------------------------------------------------------------
+TStringList *Tokenize (String s,String delimiter)
+{
+ TStringList *StringList;
+ int l; //length of s
+ int start,delimp;
+ String sub;
+ StringList = new TStringList();
+ start=0;
+ if (s.Pos(delimiter)>0)
+ {
+ delimp = s.Pos(delimiter);
+ do
+ {
+ l=s.Length();
+ sub=s.SubString(start,delimp-1);
+ if (sub != "") StringList->Add(sub);
+ s=s.SubString(delimp+1,l-delimp);
+ delimp = s.Pos(delimiter);
+ } while (delimp != 0);
+ StringList->Add(s); // dodanie tego co zosta³o na koñcu
+ }
+ else StringList->Add(s);
+ return StringList;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::NowyExecute(TObject *Sender)
+{
+	//TDocument *Zakladka;
+	//Zakladka =
+
+	TDocument *Zakladka;
+	Zakladka = new TDocument(PageControl1);
+	Zakladka->RichEdit->OnChange = UaktualnijStatystykiExecute;
+
+	PageControl1->ActivePageIndex = (PageControl1->PageCount - 1);
+
+}
+void __fastcall TForm1::ZamknijExecute(TObject *Sender)
+{
+	delete PageControl1->ActivePage;
+	PageControl1->ActivePageIndex = (PageControl1->PageCount - 1);
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TForm1::UaktualnijStatystykiExecute(TObject *Sender)
+{
+	if(TDocument* Zakladka1 = dynamic_cast<TDocument*>(PageControl1->ActivePage))
+		{
+			TStrings *tekst = Zakladka1->RichEdit->Lines;
+
+			StatusBar1->Panels->Items[0]->Text = "Znaków: " + IntToStr(strlen(tekst->GetText()));
+			TStringList *wyrazy = Tokenize(tekst->Text," ");
+			StatusBar1->Panels->Items[1]->Text = "Wyrazów: " + IntToStr(wyrazy->Count);
+			TStringList *zdania = Tokenize(tekst->Text,". ");
+			StatusBar1->Panels->Items[2]->Text = "Zdañ: " + IntToStr(zdania->Count);
+			TStringList *akapity = Tokenize(tekst->Text,"\n\r\n");
+			StatusBar1->Panels->Items[3]->Text = "Akapitów: " + IntToStr(akapity->Count);
+
+			//delete(tekst);
+		}
+}
+//---------------------------------------------------------------------------
+
+
+
+void __fastcall TForm1::StatystykaWyrazowExecute(TObject *Sender)
+{
+	Form3->Show();	
+}
+//---------------------------------------------------------------------------
+
