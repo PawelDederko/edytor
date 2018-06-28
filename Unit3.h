@@ -14,7 +14,6 @@ class TForm3 : public TForm
 __published:	// IDE-managed Components
 	TStringGrid *StringGrid1;
 	TLabel *Label1;
-	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm3(TComponent* Owner);

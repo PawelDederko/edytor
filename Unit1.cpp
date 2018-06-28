@@ -251,3 +251,27 @@ void __fastcall TForm1::CzcionkaExecute(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+
+
+
+
+void __fastcall TForm1::CloseFullScreenExecute(TObject *Sender)
+{
+	Form1->BorderStyle = bsSizeable;
+	Form1->WindowState = wsNormal;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::FullScreenExecute(TObject *Sender)
+{
+	Form1->BorderStyle = bsNone;
+	Form1->WindowState = wsMaximized;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::FormKeyPress(TObject *Sender, char &Key)
+{
+	if (Key == char(27)) Close();
+}
+//---------------------------------------------------------------------------
+

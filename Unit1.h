@@ -69,6 +69,16 @@ __published:	// IDE-managed Components
 	TToolButton *ToolButton12;
 	TToolButton *ToolButton13;
 	TMenuItem *Czcionka1;
+	TToolButton *ToolButton14;
+	TToolButton *ToolButton15;
+	TAction *FullScreen;
+	TAction *CloseFullScreen;
+	TToolButton *ToolButton16;
+	TMenuItem *Widok1;
+	TMenuItem *FullScreen1;
+	TMenuItem *CloseFullScreen1;
+	TMenuItem *FullScreen2;
+	TMenuItem *CloseFullScreen2;
 	void __fastcall OtworzExecute(TObject *Sender);
 	void __fastcall ZapiszExecute(TObject *Sender);
 	void __fastcall NowyExecute(TObject *Sender);
@@ -79,6 +89,9 @@ __published:	// IDE-managed Components
 	void __fastcall PochylenieExecute(TObject *Sender);
 	void __fastcall PodkreslenieExecute(TObject *Sender);
 	void __fastcall CzcionkaExecute(TObject *Sender);
+	void __fastcall CloseFullScreenExecute(TObject *Sender);
+	void __fastcall FullScreenExecute(TObject *Sender);
+	void __fastcall FormKeyPress(TObject *Sender, char &Key);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);

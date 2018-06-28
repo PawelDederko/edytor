@@ -13,11 +13,5 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 	: TForm(Owner)
 {
 }
-
-
-void __fastcall TForm3::FormKeyPress(TObject *Sender, char &Key)
-{
-	if (Key == char(27)) Close();
-}
 //---------------------------------------------------------------------------
 
