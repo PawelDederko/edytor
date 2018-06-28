@@ -31,6 +31,8 @@
 *.out
 *.app
 
-# Folders
+# Directories
 __history/
+Debug/
+Release/
 
