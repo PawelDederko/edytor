@@ -2797,10 +2797,14 @@ object Form1: TForm1
     end
   end
   object OpenDialog1: TOpenDialog
+    DefaultExt = '*.RTF'
+    Filter = 'Dokument RTF (*.rtf)|*.RTF|Wszystkie pliki (*.*)|*.*'
     Left = 264
     Top = 200
   end
   object SaveDialog1: TSaveDialog
+    DefaultExt = '*.RTF'
+    Filter = 'Dokument RTF (*.rtf)|*.RTF|Wszystkie pliki (*.*)|*.*'
     Left = 296
     Top = 200
   end

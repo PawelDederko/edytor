@@ -152,7 +152,7 @@ if(TDocument* Zakladka1 = dynamic_cast<TDocument*>(PageControl1->ActivePage))
 				napis.replace(napis.find("\r\n"), 2, " ");
 			}
 
-		int i, dlugoscSlowa = 0, najdluzszy = 0, elementTablicy = 0;
+		int i, dlugoscSlowa = 0, najdluzszy = 0, elementTablicy;
 		int TablicaWynikowa[max_n_znakow+1];
 		for (i = 1; i<= max_n_znakow; i++)
 				TablicaWynikowa[i] = 0;
